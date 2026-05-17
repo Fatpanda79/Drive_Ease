@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+.subtle-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+
+.subtle-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+
+
