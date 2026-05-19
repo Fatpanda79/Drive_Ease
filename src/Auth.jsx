@@ -20,6 +20,12 @@ export default function Auth({ onLoginSuccess }) {
     e.preventDefault();
     setError('');
 
+    // --- HARDCODED ADMIN CHECK ---
+    if (isLogin && formData.email === 'admin@gmail.com' && formData.password === 'admin') {
+      onLoginSuccess({ name: 'Admin', role: 'ADMIN' });
+      return; // Stop here, don't ping the database
+    }
+
     if (!isLogin && formData.password !== formData.confirmPassword) {
       setError("Passwords do not match!");
       return;
@@ -35,10 +41,10 @@ export default function Auth({ onLoginSuccess }) {
     .then(async (res) => {
       if (res.ok) {
         if (isLogin) {
-          // Login Success! Tell App.jsx to show the dashboard
-          onLoginSuccess(); 
+          const userData = await res.json();
+          // Ensure the database user is tagged as a normal USER role
+          onLoginSuccess({ ...userData, role: 'USER' }); 
         } else {
-          // Signup Success! Switch to login view
           alert("Account created! Please log in.");
           setIsLogin(true);
         }

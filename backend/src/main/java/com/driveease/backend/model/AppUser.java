@@ -15,7 +15,20 @@ public class AppUser {
     private String phoneNumber;
     private String password;
 
-    // Getters and Setters
+    private String address;
+    private String licenseNumber;
+    private String accountStatus = "Active";
+    private String role = "USER";
+    private String registrationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        // Automatically grabs today's date when a new user is saved!
+        this.registrationDate = java.time.LocalDate.now().toString();
+    }
+
+    // --- Getters and Setters ---
+
     public Long getId() {
         return id;
     }
@@ -54,5 +67,45 @@ public class AppUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }

@@ -42,4 +42,5 @@ public class VehicleController {
     public void deleteVehicle(@PathVariable Long id) {
         vehicleRepository.deleteById(id);
     }
+
 }
